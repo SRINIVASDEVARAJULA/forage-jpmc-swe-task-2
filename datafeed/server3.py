@@ -285,8 +285,11 @@ class App(object):
 
     def read_10_first_lines(self):
         for _ in iter(range(10)):
-            next(self._data_1)
-            next(self._data_2)
+            try:
+                next(self._data_1)
+                next(self._data_2)
+            except StopIteration:
+                self.__init__()
 
     @route('/query')
     def handle_query(self, x):
